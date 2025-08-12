@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>José Henrique - Desenvolvedor</title>
+    <link rel="shortcut icon" href="img/desenvolvedor.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description"
+        content="Portfólio profissional de [Seu Nome], um desenvolvedor e designer apaixonado por criar soluções digitais inovadoras e experiências de usuário memoráveis.">
+    <meta name="keywords"
+        content="desenvolvedor, designer, portfolio, web developer, ui/ux, frontend, backend, fullstack, [Seu Nome]">
+    <meta name="author" content="[Seu Nome]">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #FFFFFF;
+        }
+
+        .dark ::-webkit-scrollbar-track {
+            background-color: #112240;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #2563EB;
+            border-radius: 10px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: #64FFDA;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-[#0A192F] text-gray-800 dark:text-[#CCD6F6] transition-colors duration-300">
+
+    <header id="header"
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-300 backdrop-blur-sm bg-gray-100/80 dark:bg-[#0A192F]/80">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-blue-600 dark:text-[#64FFDA] transition-colors duration-300">José
+                Henrique</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about"
+                    class="text-gray-600 dark:text-[#8892B0] hover:text-blue-600 dark:hover:text-[#64FFDA] transition-colors duration-300">Sobre</a>
+                <a href="#experience"
+                    class="text-gray-600 dark:text-[#8892B0] hover:text-blue-600 dark:hover:text-[#64FFDA] transition-colors duration-300">Experiência</a>
+                <a href="#projects"
+                    class="text-gray-600 dark:text-[#8892B0] hover:text-blue-600 dark:hover:text-[#64FFDA] transition-colors duration-300">Projetos</a>
+                <a href="#contact"
+                    class="text-gray-600 dark:text-[#8892B0] hover:text-blue-600 dark:hover:text-[#64FFDA] transition-colors duration-300">Contato</a>
+            </div>
+            <div class="flex items-center">
+                <button id="theme-toggle"
+                    class="p-2 rounded-full hover:bg-blue-100/50 dark:hover:bg-cyan-300/10 transition-colors duration-300">
+                    <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5 text-blue-600 dark:text-[#64FFDA]"
+                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden h-5 w-5 text-blue-600 dark:text-[#64FFDA]"
+                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <button id="menu-btn"
+                    class="md:hidden ml-4 p-2 rounded-md hover:bg-blue-100/50 dark:hover:bg-cyan-300/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-[#64FFDA]"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden transition-colors duration-300">
+            <a href="#about"
+                class="block py-2 px-6 text-sm text-gray-600 dark:text-[#8892B0] hover:bg-blue-100/50 dark:hover:bg-cyan-300/10 transition-colors duration-300">Sobre</a>
+            <a href="#experience"
+                class="block py-2 px-6 text-sm text-gray-600 dark:text-[#8892B0] hover:bg-blue-100/50 dark:hover:bg-cyan-300/10 transition-colors duration-300">Experiência</a>
+            <a href="#projects"
+                class="block py-2 px-6 text-sm text-gray-600 dark:text-[#8892B0] hover:bg-blue-100/50 dark:hover:bg-cyan-300/10 transition-colors duration-300">Projetos</a>
+            <a href="#contact"
+                class="block py-2 px-6 text-sm text-gray-600 dark:text-[#8892B0] hover:bg-blue-100/50 dark:hover:bg-cyan-300/10 transition-colors duration-300">Contato</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+        <section id="hero" class="min-h-screen flex flex-col justify-center items-start">
+            <div class="max-w-3xl">
+                <p class="text-lg text-blue-600 dark:text-[#64FFDA] font-mono reveal" style="transition-delay: 100ms;">
+                    Olá, meu nome é</p>
+                <h1 class="text-4xl md:text-7xl font-bold text-gray-900 dark:text-[#CCD6F6] mt-2 reveal"
+                    style="transition-delay: 200ms;">José Henrique Lopes Motta.</h1>
+                <h2 class="text-4xl md:text-7xl font-bold text-gray-500 dark:text-[#8892B0] mt-2 reveal"
+                    style="transition-delay: 300ms;">Eu crio soluções para a web.</h2>
+                <p class="mt-6 max-w-xl text-gray-600 dark:text-[#8892B0] reveal" style="transition-delay: 400ms;">
+                    Sou um desenvolvedor com foco em aplicações Web, com o objetivo de utilizar minhas habilidades em
+                    tecnologia para criar soluções eficientes e resolver problemas de forma prática e inovadora.
+
+                </p>
+                <a href="#projects"
+                    class="inline-block mt-8 px-8 py-4 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-100/50 dark:border-[#64FFDA] dark:text-[#64FFDA] dark:hover:bg-cyan-300/10 transition-all duration-300 reveal"
+                    style="transition-delay: 500ms;">
+                    Veja meus projetos
+                </a>
+            </div>
+        </section>
+
+        <section id="about" class="py-24">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-[#CCD6F6] mb-12 flex items-center reveal">
+                <span class="text-blue-600 dark:text-[#64FFDA] font-mono mr-3">01.</span> Sobre Mim
+                <span class="flex-grow h-px bg-gray-400/30 dark:bg-[#8892B0]/30 ml-4"></span>
+            </h2>
+            <div class="grid md:grid-cols-5 gap-12">
+                <div class="md:col-span-3 text-gray-600 dark:text-[#8892B0] space-y-4 reveal">
+                    <p>
+                        Olá! Me chamo <strong>José Henrique Lopes Motta</strong>, tenho 19 anos e gosto bastante área
+                        tecnologia desde os
+                        meus primeiros contatos com a área. Minha jornada começou com o curso <strong>Técnico em
+                            Informática
+                            para Internet</strong> (2021–2023), realizado no Instituto Federal Catarinense Campus
+                        Sombrio <strong>(IFC)</strong>,
+                        onde conheci melhor sobre o desenvolvimento web.
+                    </p>
+                    <p>
+                        Atualmente, sou estudante de <strong>Bacharelado em Tecnologias da Informação e
+                            Comunicação</strong> na
+                        Universidade Federal de Santa Catarina <strong>(UFSC)</strong>, onde continuo aprimorando meus
+                        conhecimentos
+                        técnicos e explorando novas soluções para problemas do mundo real.
+                    </p>
+                    <p>
+                        Tenho vivência no desenvolvimento de aplicações web e na construção de interfaces intuitivas e
+                        responsivas. Ao longo da minha formação e em projetos diversos, busquei aplicar boas práticas de
+                        programação, versionamento de código e trabalho em equipe.
+                    </p>
+                    <p>Aqui estão algumas tecnologias com as quais tenho trabalhado recentemente:</p>
+                    <ul class="grid grid-cols-2 gap-2 font-mono text-sm">
+                        <li class="flex items-center"><span
+                                class="text-blue-600 dark:text-[#64FFDA] mr-2">▹</span>JavaScript</li>
+                        <li class="flex items-center"><span class="text-blue-600 dark:text-[#64FFDA] mr-2">▹</span>React
+                            & Next.js</li>
+                        <li class="flex items-center"><span
+                                class="text-blue-600 dark:text-[#64FFDA] mr-2">▹</span>Node.js</li>
+                        <li class="flex items-center"><span
+                                class="text-blue-600 dark:text-[#64FFDA] mr-2">▹</span>TypeScript</li>
+                        <li class="flex items-center"><span class="text-blue-600 dark:text-[#64FFDA] mr-2">▹</span>Figma
+                        </li>
+                        <li class="flex items-center"><span
+                                class="text-blue-600 dark:text-[#64FFDA] mr-2">▹</span>Tailwind CSS</li>
+                    </ul>
+                </div>
+                <div class="md:col-span-2 flex justify-center items-center reveal">
+                    <div class="w-64 h-64 rounded-lg relative group">
+                        <div
+                            class="absolute inset-0 bg-blue-600 dark:bg-[#64FFDA] rounded-lg transform group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300">
+                        </div>
+                        <img src="img/eu.png" alt="Foto de perfil de [Seu Nome]"
+                            class="absolute inset-0 w-full h-full object-cover rounded-lg transform -translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-24">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-[#CCD6F6] mb-12 flex items-center reveal">
+                <span class="text-blue-600 dark:text-[#64FFDA] font-mono mr-3">02.</span> Experiência Profissional
+                <span class="flex-grow h-px bg-gray-400/30 dark:bg-[#8892B0]/30 ml-4"></span>
+            </h2>
+            <div class="max-w-3xl mx-auto reveal">
+                <div class="flex mb-8">
+                    <div class="mr-6">
+                        <svg class="w-8 h-8 text-blue-600 dark:text-[#64FFDA]" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-[#CCD6F6]">Desenvolvedor Frontend |
+                            Softcommerce</h3>
+                        <p class="text-sm font-mono text-gray-500 dark:text-[#8892B0] mb-3">Setembro 2024 - Presente</p>
+                        <ul class="list-disc list-inside text-gray-600 dark:text-[#8892B0] space-y-2">
+                            <li>Desenvolvi <strong>templates de e-mail marketing</strong> otimizando o tempo de produção
+                                e garantindo
+                                qualidade na entrega.</li>
+                            <li>Colaborei em <strong>implementações e atualizações de lojas e-commerces</strong>,
+                                contribuindo para a
+                                melhoria da performance e usabilidade.</li>
+                            <li>Apoiei no desenvolvimento do <strong>frontend</strong> de um sistema interno, focando em
+                                uma <strong>interface
+                                    intuitiva</strong>, funcional e prática.
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="mr-6">
+                        <svg class="w-8 h-8 text-blue-600 dark:text-[#64FFDA]" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-[#CCD6F6]">Desenvolvedor Back-End|
+                            Instituto Federal Catarinense,
+                            Criativa</h3>
+                        <p class="text-sm font-mono text-gray-500 dark:text-[#8892B0] mb-3">Maio 2023 - Novembro 2023
+                        </p>
+                        <ul class="list-disc list-inside text-gray-600 dark:text-[#8892B0] space-y-2">
+                            <li>
+                                Bolsista no projeto "Beleza Center" pelo programa IF Mais Empreendedor Nacional. Atuei
+                                principalmente no back-end, contribuindo também no front-end. Desenvolvemos um sistema
+                                para gestão de salões de beleza, promovendo o trabalho em equipe e o aperfeiçoamento
+                                de habilidades técnicas.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-24">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-[#CCD6F6] mb-12 flex items-center reveal">
+                <span class="text-blue-600 dark:text-[#64FFDA] font-mono mr-3">03.</span> Meus Projetos
+                <span class="flex-grow h-px bg-gray-400/30 dark:bg-[#8892B0]/30 ml-4"></span>
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div
+                    class="bg-white dark:bg-[#112240] rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 group reveal">
+                    <img src="img/dacorweb.png" alt="Imagem do Projeto 1" class="w-full h-48 object-cover"
+                        loading="lazy">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-[#CCD6F6]">(Dacorweb) Sistema ERP</h3>
+                            <div class="flex space-x-4">
+                                <a href="https://github.com/dev-josehenrique/DacorWeb" target="_blank"
+                                    class="text-gray-500 dark:text-[#8892B0] hover:text-blue-600 dark:hover:text-[#64FFDA] transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-6 h-6">
+                                        <title>GitHub</title>
+                                        <path
+                                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                        </path>
+                                    </svg>
+                                </a>
+
+                                <a href="./docs/dacorweb-docs.html" target="_blank"
+                                    class="text-gray-500 dark:text-[#8892B0] hover:text-blue-600 dark:hover:text-[#64FFDA] transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-6 h-6">
+                                        <title>Documentação</title>
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                                        <polyline points="10 9 9 9 8 9"></polyline>
+                                    </svg>
+                                </a>
+
+                                <a href="https://dacorweb.devjosehenrique.com.br" target="_blank"
+                                    class="text-gray-500 dark:text-[#8892B0] hover:text-blue-600 dark:hover:text-[#64FFDA] transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-6 h-6">
+                                        <title>Link Externo</title>
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-[#8892B0] mb-4">Este projeto é um sistema abrangente que
+                            inclui a geração de relatórios em PDF, gerenciamento de informações como estoque, cadastro
+                            de produtos e muito mais. Além disso, apresenta um painel de vendas, recursos de
+                            criptografia, variáveis de seção e um gateway de pagamento integrado.
+
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm font-mono text-gray-500 dark:text-[#8892B0]">
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">PHP</span>
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">MySQL</span>
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">MercadoPago</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-[#112240] rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 group reveal"
+                    style="transition-delay: 100ms;">
+                    <img src="img/aiapua.png" alt="Imagem do Projeto 2" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-[#CCD6F6]">Aiapua Amidos</h3>
+
+                        </div>
+                        <p class="text-gray-600 dark:text-[#8892B0] mb-4">Este projeto consistiu no desenvolvimento de
+                            um sistema de gestão para uma indústria de amido. Atuei principalmente como consultor
+                            técnico, contribuindo com melhorias tanto na interface do usuário (front-end) quanto na
+                            estrutura e lógica do sistema (back-end).
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm font-mono text-gray-500 dark:text-[#8892B0]">
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">React</span>
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">React
+                                Native</span>
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">PostgreSQL
+                                / Supabase / Firebase</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-[#112240] rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 group reveal"
+                    style="transition-delay: 200ms;">
+                    <img src="img/consutasnet.png" alt="Imagem do Projeto 3" class="w-full h-48 object-cover"
+                        loading="lazy">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-[#CCD6F6]">Software Odontológico
+                                Consultasnet</h3>
+                            <div class="flex space-x-3">
+                                <a href="https://consultasnet.com.br" target="_blank"
+                                    class="text-gray-500 dark:text-[#8892B0] hover:text-blue-600 dark:hover:text-[#64FFDA] transition-colors"><svg
+                                        xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-6 h-6">
+                                        <title>Link Externo</title>
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg></a>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-[#8892B0] mb-4">Neste projeto, atuei como analista de
+                            segurança da infraestrutura em algumas partes do sistema. Contribuí para reforçar a
+                            segurança em pontos vulneráveis e sugeri algumas modificações importantes.</p>
+                        <div class="flex flex-wrap gap-2 text-sm font-mono text-gray-500 dark:text-[#8892B0]">
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">Testes</span>
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">Relatórios</span>
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">Correções</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-[#112240] rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 group reveal">
+                    <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1" alt="Imagem do Projeto 1"
+                        class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-[#CCD6F6]">Minhas Ferramentas Web
+                            </h3>
+                            <div class="flex space-x-3">
+                                <a href="https://ferramentas.devjosehenrique.com.br" target="_blank"
+                                    class="text-gray-500 dark:text-[#8892B0] hover:text-blue-600 dark:hover:text-[#64FFDA] transition-colors"><svg
+                                        xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-6 h-6">
+                                        <title>Link Externo</title>
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg></a>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-[#8892B0] mb-4">Esta página reúne um conjunto de ferramentas
+                            web desenvolvidas com o objetivo de facilitar tarefas do dia a dia. Cada projeto foi pensado
+                            para ser um utilitário prático, apresentado com um design moderno e interativo.
+
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-sm font-mono text-gray-500 dark:text-[#8892B0]">
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">HTML</span>
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">CSS</span>
+                            <span
+                                class="bg-blue-100/50 dark:bg-cyan-300/10 px-2 py-1 rounded transition-colors duration-300">Brittany
+                                Chiang</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="contact" class="py-24 text-center">
+            <div class="max-w-xl mx-auto reveal">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-[#CCD6F6] mb-2"><span
+                        class="text-blue-600 dark:text-[#64FFDA] font-mono mr-2">04.</span> Qual o próximo passo?</h2>
+                <h3 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-[#CCD6F6] mb-4">Entre em Contato</h3>
+                <p class="text-gray-600 dark:text-[#8892B0] mb-8">
+                    Farei o meu melhor para responder o mais
+                    rápido possível!
+                </p>
+                <a href="https://links.devjosehenrique.com.br"
+                    class="inline-block px-8 py-4 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-100/50 dark:border-[#64FFDA] dark:text-[#64FFDA] dark:hover:bg-cyan-300/10 transition-all duration-300">
+                    Mais informações de Contato
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-8">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center">
+            <div class="flex space-x-6 mb-4 md:mb-0">
+
+                <a href="https://wa.me/5548999451143?text=Olá,%20vim%20pelo%20seu%20portfólio%20e%20gostaria%20de%20conversar."
+                    target="_blank"
+                    class="text-gray-500 dark:text-[#8892B0] hover:text-green-500 dark:hover:text-[#64FFDA] transition-colors">
+                    <i class="fab fa-whatsapp w-6 h-6 text-xl"></i>
+                </a>
+
+                <a href="https://www.linkedin.com/in/josehenriqu3/" target="_blank"
+                    class="text-gray-500 dark:text-[#8892B0] hover:text-blue-500 dark:hover:text-[#64FFDA] transition-colors">
+                    <i class="fab fa-linkedin w-6 h-6 text-xl"></i>
+                </a>
+
+                <a href="https://github.com" target="_blank"
+                    class="text-gray-500 dark:text-[#8892B0] hover:text-black dark:hover:text-[#64FFDA] transition-colors">
+                    <i class="fab fa-github w-6 h-6 text-xl"></i>
+                </a>
+
+                <a href="mailto:josehenriquese125@gmail.com?subject=Contato%20via%20portfólio&body=Olá,%20vim%20pelo%20seu%20portfólio%20e%20gostaria%20de%20conversar."
+                    target="_blank"
+                    class="text-gray-500 dark:text-[#8892B0] hover:text-red-500 dark:hover:text-[#64FFDA] transition-colors">
+                    <i class="fas fa-envelope w-6 h-6 text-xl"></i>
+                </a>
+
+
+            </div>
+            <p class="text-sm text-gray-500 dark:text-[#8892B0] font-mono">
+                Criado por José Henrique com inspiração em Brittany Chiang.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const darkIcon = document.getElementById('theme-toggle-dark-icon');
+            const lightIcon = document.getElementById('theme-toggle-light-icon');
+            const htmlElement = document.documentElement;
+
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    htmlElement.classList.add('dark');
+                    darkIcon.classList.remove('hidden');
+                    lightIcon.classList.add('hidden');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    darkIcon.classList.add('hidden');
+                    lightIcon.classList.remove('hidden');
+                }
+            };
+
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            applyTheme(initialTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const isDark = htmlElement.classList.contains('dark');
+                const newTheme = isDark ? 'light' : 'dark';
+                applyTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            revealElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            let lastScrollTop = 0;
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function () {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    header.style.top = '-100px';
+                } else {
+                    header.style.top = '0';
+                }
+                if (scrollTop > 50) {
+                    header.classList.add('shadow-md');
+                } else {
+                    header.classList.remove('shadow-md');
+                }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            }, false);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramentas Web</title>
+    <link rel="shortcut icon" href="img/desenvolvedor.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-navy: #020c1b;
+            --navy: #0a192f;
+            --light-navy: #112240;
+            --lightest-navy: #233554;
+            --slate: #8892b0;
+            --light-slate: #a8b2d1;
+            --lightest-slate: #ccd6f6;
+            --white: #e6f1ff;
+            --green: #64ffda;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        body[data-theme="light"] {
+            --navy: #f0f2f5;
+            --light-navy: #ffffff;
+            --dark-navy: #e2e8f0;
+            --lightest-navy: #ffffff;
+            --slate: #4a5568;
+            --light-slate: #2d3748;
+            --lightest-slate: #1a202c;
+            --green: #3182ce;
+        }
+
+        body[data-theme="forest"] {
+            --navy: #1a2a2a;
+            --light-navy: #1e3a3a;
+            --dark-navy: #121f1f;
+            --lightest-navy: #294b4b;
+            --slate: #a0b3b3;
+            --light-slate: #c0d1d1;
+            --lightest-slate: #e0f0f0;
+            --green: #4fd1c5;
+        }
+
+        body {
+            background-color: var(--navy);
+            color: var(--slate);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 25px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            color: var(--lightest-slate);
+            font-size: clamp(40px, 5vw, 60px);
+            font-weight: 700;
+            margin: 0 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .subtitle {
+            color: var(--green);
+            font-family: var(--font-mono);
+            font-size: clamp(14px, 3vw, 16px);
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .theme-switcher {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .theme-button {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--light-slate);
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .theme-button:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-button.active {
+            border-color: var(--green);
+            transform: scale(1.2);
+        }
+
+        .theme-button[data-theme="navy"] { background-color: #0a192f; }
+        .theme-button[data-theme="light"] { background-color: #f0f2f5; }
+        .theme-button[data-theme="forest"] { background-color: #1e3a3a; }
+
+        main {
+            flex: 1;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0;
+            margin: 0 0 50px;
+        }
+
+        .tool-card {
+            background-color: var(--light-navy);
+            border-radius: 4px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid transparent;
+        }
+
+        .tool-card:hover,
+        .tool-card:focus {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            border-left: 2px solid var(--green);
+            outline: none;
+        }
+
+        .tool-title {
+            color: var(--lightest-slate);
+            font-size: 1.5rem;
+            margin: 0 0 10px;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .tool-description {
+            font-size: 1rem;
+            color: var(--light-slate);
+            transition: color 0.3s ease;
+        }
+
+        .tool-footer {
+            margin-top: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--green);
+            transition: color 0.3s ease;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--slate);
+        }
+
+        footer a {
+            color: var(--green);
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+
+        footer a:hover {
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            header {
+                padding: 80px 0;
+            }
+
+            .theme-switcher {
+                top: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body data-theme="navy">
+    <div class="container">
+        <header>
+            <div class="theme-switcher">
+                <button data-theme="navy" class="theme-button" aria-label="Mudar para tema Navy"></button>
+                <button data-theme="light" class="theme-button" aria-label="Mudar para tema Claro"></button>
+                <button data-theme="forest" class="theme-button" aria-label="Mudar para tema Floresta"></button>
+            </div>
+            <h1>Minhas Ferramentas Web</h1>
+            <p class="subtitle">Uma coleção de utilitários para o dia a dia.</p>
+        </header>
+
+        <main>
+            <section class="tools-grid">
+                <a href="./geradorqrcode/index.html" target="_blank" class="tool-card" aria-label="Aceder ao Gerador de QR Code">
+                    <div class="tool-content">
+                        <h3 class="tool-title">Gerador de QR Code</h3>
+                        <p class="tool-description">Crie códigos QR a partir de qualquer link de forma simples e rápida.</p>
+                    </div>
+                    <div class="tool-footer">
+                        <span>Acessar à Ferramenta</span>
+                    </div>
+                </a>
+
+                <a href="./formatacaotexto/index.html" target="_blank" class="tool-card" aria-label="Aceder ao Conversor de Texto">
+                    <div class="tool-content">
+                        <h3 class="tool-title">Conversor de Texto</h3>
+                        <p class="tool-description">Alterne facilmente entre MAIÚSCULAS e minúsculas.</p>
+                    </div>
+                    <div class="tool-footer">
+                        <span>Acessar à Ferramenta</span>
+                    </div>
+                </a>
+
+                <a href="./contadorcaracteres/index.html" target="_blank" class="tool-card" aria-label="Aceder ao Contador de Caracteres">
+                    <div class="tool-content">
+                        <h3 class="tool-title">Contador de Caracteres</h3>
+                        <p class="tool-description">Conte palavras e caracteres de um texto instantaneamente.</p>
+                    </div>
+                    <div class="tool-footer">
+                        <span>Acessar à Ferramenta</span>
+                    </div>
+                </a> 
+
+            </section>
+        </main>
+
+        <footer>
+            <p>Design inspirado em <a href="https://brittanychiang.com/" target="_blank" rel="noopener noreferrer">Brittany Chiang</a>.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeButtons = document.querySelectorAll('.theme-button');
+            const body = document.body;
+
+            const setTheme = (themeName) => {
+                body.setAttribute('data-theme', themeName);
+                
+                themeButtons.forEach(btn => {
+                    if (btn.getAttribute('data-theme') === themeName) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            };
+
+            themeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const themeName = button.getAttribute('data-theme');
+                    setTheme(themeName);
+                });
+            });
+
+            const initialTheme = body.getAttribute('data-theme');
+            if (initialTheme) {
+                const activeButton = document.querySelector(`.theme-button[data-theme="${initialTheme}"]`);
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
