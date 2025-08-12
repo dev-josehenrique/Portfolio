@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação LIBRAS - José Henrique</title>
+    <link rel="shortcut icon" href="../../portfolio/img/desenvolvedor.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Documentação detalhada do projeto de Reconhecimento de Gestos em LIBRAS utilizando OpenCV e MediaPipe.">
+    <meta name="author" content="José Henrique Lopes Motta">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #FFFFFF;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background-color: #112240;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #2563EB;
+            border-radius: 10px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: #64FFDA;
+        }
+        .code-block {
+            background-color: #1E293B;
+            color: #E2E8F0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-[#0A192F] text-gray-800 dark:text-[#CCD6F6] transition-colors duration-300">
+
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 backdrop-blur-sm bg-gray-100/80 dark:bg-[#0A192F]/80">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../../portfolio/index.html" class="text-xl font-bold text-blue-600 dark:text-[#64FFDA] transition-colors duration-300">José Henrique</a>
+            <div class="flex items-center space-x-4">
+                <a href="../../portfolio/index.html" class="hidden md:block text-gray-600 dark:text-[#8892B0] hover:text-blue-600 dark:hover:text-[#64FFDA] transition-colors duration-300">Voltar aos Projetos</a>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-blue-100/50 dark:hover:bg-cyan-300/10 transition-colors duration-300">
+                    <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5 text-blue-600 dark:text-[#64FFDA]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden h-5 w-5 text-blue-600 dark:text-[#64FFDA]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 pt-32 pb-12">
+        <section id="doc-hero" class="mb-16 reveal">
+            <p class="text-lg text-blue-600 dark:text-[#64FFDA] font-mono">Projeto de Sistemas Multimídias</p>
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-[#CCD6F6] mt-2">Reconhecimento de Gestos em LIBRAS</h1>
+            <p class="mt-4 max-w-3xl text-gray-600 dark:text-[#8892B0]">Sistema que realiza o reconhecimento do alfabeto da Língua Brasileira de Sinais utilizando Visão Computacional para promover a inclusão educacional.</p>
+            <div class="flex space-x-4 mt-6">
+                <a href="https://github.com/dev-josehenrique/ReconhecimentoLibras" target="_blank" class="inline-block px-6 py-3 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-100/50 dark:border-[#64FFDA] dark:text-[#64FFDA] dark:hover:bg-cyan-300/10 transition-all duration-300">
+                    <i class="fab fa-github mr-2"></i> Ver no GitHub
+                </a>
+            </div>
+        </section>
+
+        <div class="max-w-4xl mx-auto">
+            <section id="demonstracao" class="mb-12 reveal">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-[#CCD6F6] mb-6 flex items-center">
+                    <span class="text-blue-600 dark:text-[#64FFDA] font-mono mr-3">01.</span> Demonstração
+                    <span class="flex-grow h-px bg-gray-400/30 dark:bg-[#8892B0]/30 ml-4"></span>
+                </h2>
+                <p class="text-gray-600 dark:text-[#8892B0] mb-4">Soletrando "O I U F S C" em tempo real:</p>
+                <img src="./img/OIUFSC.gif" alt="Demonstração do sistema soletrando OIUFSC" class="gallery-image rounded-lg shadow-lg w-full cursor-pointer transition-transform duration-300 hover:scale-105">
+            </section>
+
+            <section id="tecnologias" class="mb-12 reveal">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-[#CCD6F6] mb-6 flex items-center">
+                    <span class="text-blue-600 dark:text-[#64FFDA] font-mono mr-3">02.</span> Tecnologias e Requisitos
+                    <span class="flex-grow h-px bg-gray-400/30 dark:bg-[#8892B0]/30 ml-4"></span>
+                </h2>
+                <div class="flex flex-wrap gap-3 text-sm font-mono text-gray-500 dark:text-[#8892B0]">
+                    <span class="bg-blue-100/50 dark:bg-cyan-300/10 px-3 py-1 rounded-full">Python 3.8</span>
+                    <span class="bg-blue-100/50 dark:bg-cyan-300/10 px-3 py-1 rounded-full">TensorFlow 2.8</span>
+                    <span class="bg-blue-100/50 dark:bg-cyan-300/10 px-3 py-1 rounded-full">MediaPipe 0.10</span>
+                    <span class="bg-blue-100/50 dark:bg-cyan-300/10 px-3 py-1 rounded-full">OpenCV</span>
+                    <span class="bg-blue-100/50 dark:bg-cyan-300/10 px-3 py-1 rounded-full">Keras</span>
+                </div>
+                 <div class="mt-6 bg-yellow-100 dark:bg-yellow-900/30 border-l-4 border-yellow-500 text-yellow-800 dark:text-yellow-300 p-4 rounded-r-lg" role="alert">
+                    <p class="font-bold">Atenção</p>
+                    <p>Recomenda-se o uso do Python 3.8.0. Versões superiores (3.11+) podem apresentar incompatibilidades com o TensorFlow e MediaPipe utilizados.</p>
+                </div>
+            </section>
+
+            <section id="execucao" class="mb-12 reveal">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-[#CCD6F6] mb-6 flex items-center">
+                    <span class="text-blue-600 dark:text-[#64FFDA] font-mono mr-3">03.</span> Como Rodar o Projeto
+                    <span class="flex-grow h-px bg-gray-400/30 dark:bg-[#8892B0]/30 ml-4"></span>
+                </h2>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-gray-600 dark:text-[#8892B0] mb-2">1. Clone o repositório:</p>
+                        <pre class="code-block">git clone https://github.com/dev-josehenrique/ReconhecimentoLibras.git
+cd ReconhecimentoLibras</pre>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 dark:text-[#8892B0] mb-2">2. Crie e ative o ambiente virtual:</p>
+                        <pre class="code-block">python -m venv venv
+# No Windows:
+venv\Scripts\activate
+# No Linux/Mac:
+source venv/bin/activate</pre>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 dark:text-[#8892B0] mb-2">3. Instale as dependências:</p>
+                        <pre class="code-block">pip install -r requirements.txt</pre>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 dark:text-[#8892B0] mb-2">4. Execute o programa (pressione 'q' para sair):</p>
+                        <pre class="code-block">python main.py</pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="galeria" class="mb-12 reveal">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-[#CCD6F6] mb-6 flex items-center">
+                    <span class="text-blue-600 dark:text-[#64FFDA] font-mono mr-3">04.</span> Galeria do Projeto
+                    <span class="flex-grow h-px bg-gray-400/30 dark:bg-[#8892B0]/30 ml-4"></span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <img src="./img/modelo_treinamento.gif" alt="Treinamento do modelo" class="gallery-image rounded-lg shadow-lg w-full cursor-pointer transition-transform duration-300 hover:scale-105">
+                    <img src="./img/modelo_testando_resultado.png" alt="Teste do modelo e precisão" class="gallery-image rounded-lg shadow-lg w-full cursor-pointer transition-transform duration-300 hover:scale-105">
+                </div>
+                <div class="mt-4">
+                     <img src="./img/alfabeto_libras.png" alt="Alfabeto em Libras" class="gallery-image rounded-lg shadow-lg w-full cursor-pointer transition-transform duration-300 hover:scale-105">
+                </div>
+            </section>
+
+             <section id="agradecimentos" class="mb-12 reveal">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-[#CCD6F6] mb-6 flex items-center">
+                    <span class="text-blue-600 dark:text-[#64FFDA] font-mono mr-3">05.</span> Agradecimentos
+                    <span class="flex-grow h-px bg-gray-400/30 dark:bg-[#8892B0]/30 ml-4"></span>
+                </h2>
+                <ul class="space-y-2 pl-4 text-gray-600 dark:text-[#8892B0]">
+                    <li class="flex items-start"><span class="text-blue-600 dark:text-[#64FFDA] mr-3 mt-1">▹</span><span>Google Teachable Machine, MediaPipe, TensorFlow, Keras, OpenCV, NumPy, Protobuf e a comunidade de Visão Computacional.</span></li>
+                </ul>
+            </section>
+        </div>
+    </main>
+    
+    <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-80 z-50 flex justify-center items-center transition-opacity duration-300">
+        <div class="relative">
+            <button id="closeModal" class="absolute -top-4 -right-4 text-white text-5xl font-bold hover:text-gray-300 transition-colors" aria-label="Fechar">&times;</button>
+            <img id="modalImage" src="" alt="Imagem ampliada" class="max-w-[90vw] max-h-[90vh] rounded-lg">
+        </div>
+    </div>
+
+    <footer class="py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm text-gray-500 dark:text-[#8892B0] font-mono">
+                Criado por José Henrique com inspiração em Brittany Chiang.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const darkIcon = document.getElementById('theme-toggle-dark-icon');
+            const lightIcon = document.getElementById('theme-toggle-light-icon');
+            const htmlElement = document.documentElement;
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    htmlElement.classList.add('dark');
+                    darkIcon.classList.remove('hidden');
+                    lightIcon.classList.add('hidden');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    darkIcon.classList.add('hidden');
+                    lightIcon.classList.remove('hidden');
+                }
+            };
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            applyTheme(initialTheme);
+            themeToggleBtn.addEventListener('click', () => {
+                const isDark = htmlElement.classList.contains('dark');
+                const newTheme = isDark ? 'light' : 'dark';
+                applyTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            revealElements.forEach(el => {
+                observer.observe(el);
+            });
+            let lastScrollTop = 0;
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > 50) {
+                    header.classList.add('shadow-md');
+                } else {
+                    header.classList.remove('shadow-md');
+                }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            }, false);
+            const imageModal = document.getElementById('imageModal');
+            if (imageModal) {
+                const modalImage = document.getElementById('modalImage');
+                const closeModalBtn = document.getElementById('closeModal');
+                const galleryImages = document.querySelectorAll('.gallery-image');
+                galleryImages.forEach(img => {
+                    img.addEventListener('click', () => {
+                        imageModal.classList.remove('hidden');
+                        modalImage.src = img.src;
+                    });
+                });
+                const closeModal = () => {
+                    imageModal.classList.add('hidden');
+                };
+                closeModalBtn.addEventListener('click', closeModal);
+                imageModal.addEventListener('click', (e) => {
+                    if (e.target === imageModal) {
+                        closeModal();
+                    }
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && !imageModal.classList.contains('hidden')) {
+                        closeModal();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
