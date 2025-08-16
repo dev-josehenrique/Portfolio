@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor e Tabela de Entidades HTML</title>
+    <link rel="shortcut icon" href="https://brittanychiang.com/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0a192f;
+            --text-color-primary: #ccd6f6;
+            --text-color-secondary: #8892b0;
+            --accent-color: #64ffda;
+            --card-bg-color: #112240;
+            --border-color: #233554;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        body.light-theme {
+            --bg-color: #f0f2f5;
+            --text-color-primary: #1c1e21;
+            --text-color-secondary: #606770;
+            --accent-color: #007bff;
+            --card-bg-color: #ffffff;
+            --border-color: #dce1e4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color-secondary);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px;
+            background-color: var(--card-bg-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+            transition: background-color 0.3s;
+        }
+
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 {
+            color: var(--text-color-primary);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .header p { font-size: 1rem; }
+        
+        .converter-wrapper { display: flex; gap: 25px; margin-bottom: 30px; }
+        .input-area, .output-area { flex: 1; display: flex; flex-direction: column; }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-color-primary);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            min-height: 250px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 15px;
+            color: var(--text-color-primary);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            transition: border-color 0.3s, background-color 0.3s;
+            resize: vertical;
+        }
+        textarea:focus { outline: none; border-color: var(--accent-color); }
+        textarea[readonly] { background-color: #0d1e3a; }
+        body.light-theme textarea[readonly] { background-color: #e9ecef; }
+
+        .options-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            font-family: var(--font-mono);
+            flex-wrap: wrap;
+        }
+        .case-option { display: flex; align-items: center; cursor: pointer; }
+        .case-option input[type="radio"] { display: none; }
+        .case-option .radio-label {
+            padding: 8px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .case-option input[type="radio"]:checked + .radio-label {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border-color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .btn {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-left: 10px;
+        }
+        .btn:hover { background-color: rgba(100, 255, 218, 0.1); }
+        body.light-theme .btn:hover { background-color: rgba(0, 123, 255, 0.1); }
+
+        .table-container { margin-top: 40px; }
+        .table-container h2 {
+            color: var(--text-color-primary);
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: var(--font-mono);
+        }
+
+        .search-input {
+            width: 100%;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 12px 15px;
+            color: var(--text-color-primary);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            margin-bottom: 20px;
+        }
+        .search-input:focus { outline: none; border-color: var(--accent-color); }
+
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+        thead th { color: var(--text-color-primary); font-family: var(--font-mono); }
+        
+        tbody tr:hover { background-color: rgba(100, 255, 218, 0.05); }
+        body.light-theme tbody tr:hover { background-color: rgba(0, 123, 255, 0.05); }
+
+        tbody td {
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+        }
+        tbody td:first-child {
+            font-family: var(--font-sans);
+            color: var(--text-color-primary);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        #no-results-row td {
+            text-align: center;
+            font-family: var(--font-sans);
+            color: var(--text-color-secondary);
+            padding: 20px;
+        }
+
+        .nav-links { position: fixed; top: 25px; left: 25px; z-index: 11; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            transition: color 0.3s;
+        }
+        .back-link:hover { color: var(--text-color-primary); }
+
+        .theme-toggle {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: none; border: none;
+            color: var(--accent-color);
+            cursor: pointer; padding: 5px; z-index: 11;
+        }
+
+        .toast {
+            visibility: hidden; min-width: 280px;
+            background-color: var(--card-bg-color);
+            color: var(--text-color-primary);
+            text-align: center; border-radius: 4px; padding: 16px;
+            position: fixed; z-index: 10; bottom: 30px;
+            left: 50%; transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.5s, visibility 0.5s;
+            border: 1px solid var(--border-color);
+            font-family: var(--font-mono);
+        }
+        .toast.show { visibility: visible; opacity: 1; }
+
+        @media (max-width: 768px) {
+            body { padding: 20px 10px; }
+            .container { padding: 20px; }
+            .header h1 { font-size: 2rem; }
+            .converter-wrapper { flex-direction: column; }
+            .nav-links { top: 15px; left: 15px; }
+            .theme-toggle { top: 15px; right: 15px; }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="nav-links">
+        <a href="index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Voltar</span>
+        </a>
+    </nav>
+
+    <button id="theme-toggle" class="theme-toggle" title="Alternar tema">
+        <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </button>
+
+    <main class="container">
+        <header class="header">
+            <h1>Conversor e Tabela de Entidades HTML</h1>
+            <p>Converta caracteres especiais e consulte seus códigos correspondentes.</p>
+        </header>
+
+        <div class="converter-wrapper">
+            <div class="input-area">
+                <label for="inputText">Texto Original</label>
+                <textarea id="inputText" placeholder="Cole seu texto aqui..."></textarea>
+            </div>
+            <div class="output-area">
+                <label for="outputText">Texto Convertido (Código)</label>
+                <textarea id="outputText" readonly placeholder="O código HTML aparecerá aqui."></textarea>
+            </div>
+        </div>
+
+        <div class="options-area">
+            <span>Converter para:</span>
+            <label class="case-option">
+                <input type="radio" name="case" value="auto" checked>
+                <span class="radio-label">Normal</span>
+            </label>
+            <label class="case-option">
+                <input type="radio" name="case" value="lower">
+                <span class="radio-label">Minúsculas</span>
+            </label>
+            <label class="case-option">
+                <input type="radio" name="case" value="upper">
+                <span class="radio-label">Maiúsculas</span>
+            </label>
+            <button id="copyResultBtn" class="btn">Copiar Resultado</button>
+        </div>
+
+        <div class="table-container">
+            <h2>Tabela de Referência Rápida</h2>
+            <input type="search" id="searchInput" class="search-input" placeholder="Buscar caractere, entidade ou código...">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Caractere</th>
+                            <th>Entidade (Nome)</th>
+                            <th>Entidade (Número)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="entity-table-body">
+                        <tr id="no-results-row" style="display: none;">
+                            <td colspan="3">Nenhum resultado encontrado.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputText = document.getElementById('inputText');
+            const outputText = document.getElementById('outputText');
+            const caseRadios = document.querySelectorAll('input[name="case"]');
+            const copyResultBtn = document.getElementById('copyResultBtn');
+            const toast = document.getElementById('toast');
+            const themeToggle = document.getElementById('theme-toggle');
+            const tableBody = document.getElementById('entity-table-body');
+            const searchInput = document.getElementById('searchInput');
+            const noResultsRow = document.getElementById('no-results-row');
+            
+            // Variável para armazenar o resultado real para a cópia
+            let rawResultForCopy = '';
+
+            const entityMap = {
+                'á': { lower: '&aacute;', upper: '&Aacute;', numLower: '&#225;', numUpper: '&#193;' },
+                'à': { lower: '&agrave;', upper: '&Agrave;', numLower: '&#224;', numUpper: '&#192;' },
+                'â': { lower: '&acirc;', upper: '&Acirc;', numLower: '&#226;', numUpper: '&#194;' },
+                'ã': { lower: '&atilde;', upper: '&Atilde;', numLower: '&#227;', numUpper: '&#195;' },
+                'é': { lower: '&eacute;', upper: '&Eacute;', numLower: '&#233;', numUpper: '&#201;' },
+                'ê': { lower: '&ecirc;', upper: '&Ecirc;', numLower: '&#234;', numUpper: '&#202;' },
+                'í': { lower: '&iacute;', upper: '&Iacute;', numLower: '&#237;', numUpper: '&#205;' },
+                'ó': { lower: '&oacute;', upper: '&Oacute;', numLower: '&#243;', numUpper: '&#211;' },
+                'ô': { lower: '&ocirc;', upper: '&Ocirc;', numLower: '&#244;', numUpper: '&#212;' },
+                'õ': { lower: '&otilde;', upper: '&Otilde;', numLower: '&#245;', numUpper: '&#213;' },
+                'ú': { lower: '&uacute;', upper: '&Uacute;', numLower: '&#250;', numUpper: '&#218;' },
+                'ü': { lower: '&uuml;', upper: '&Uuml;', numLower: '&#252;', numUpper: '&#220;' },
+                'ç': { lower: '&ccedil;', upper: '&Ccedil;', numLower: '&#231;', numUpper: '&#199;' }
+            };
+
+            const populateTable = () => {
+                let html = '';
+                for (const char in entityMap) {
+                    const data = entityMap[char];
+                    html += `<tr><td>${char}</td><td>${data.lower}</td><td>${data.numLower}</td></tr>`;
+                    html += `<tr><td>${char.toUpperCase()}</td><td>${data.upper}</td><td>${data.numUpper}</td></tr>`;
+                }
+                noResultsRow.insertAdjacentHTML('beforebegin', html);
+            };
+
+            const escapeHtmlForDisplay = (str) => {
+                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            };
+
+            const convertText = () => {
+                const text = inputText.value;
+                const selectedCase = document.querySelector('input[name="case"]:checked').value;
+                let result = '';
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    const lowerChar = char.toLowerCase();
+                    if (entityMap[lowerChar]) {
+                        const entity = entityMap[lowerChar];
+                        if (selectedCase === 'lower') {
+                            result += entity.lower;
+                        } else if (selectedCase === 'upper') {
+                            result += entity.upper;
+                        } else {
+                            const isUpperCase = (char === char.toUpperCase() && char !== lowerChar);
+                            result += isUpperCase ? entity.upper : entity.lower;
+                        }
+                    } else {
+                        result += char;
+                    }
+                }
+                // Armazena o resultado real para a cópia
+                rawResultForCopy = result;
+                // Exibe o resultado "escapado" para visualização correta
+                outputText.value = escapeHtmlForDisplay(result);
+            };
+
+            const filterTable = () => {
+                const query = searchInput.value.toLowerCase().trim();
+                const rows = tableBody.querySelectorAll('tr:not(#no-results-row)');
+                let visibleRows = 0;
+                rows.forEach(row => {
+                    const rowText = row.textContent.toLowerCase();
+                    if (rowText.includes(query)) {
+                        row.style.display = '';
+                        visibleRows++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                noResultsRow.style.display = visibleRows === 0 ? 'table-row' : 'none';
+            };
+
+            inputText.addEventListener('input', convertText);
+            caseRadios.forEach(radio => radio.addEventListener('change', convertText));
+            searchInput.addEventListener('input', filterTable);
+            
+            const showToast = (message) => {
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            };
+
+            const copyToClipboard = async (text) => {
+                if (!text || text.trim() === '') {
+                    showToast('Nada para copiar!');
+                    return;
+                }
+                try {
+                    await navigator.clipboard.writeText(text);
+                    showToast('Copiado para a área de transferência!');
+                } catch (err) {
+                    showToast('Erro ao copiar texto.');
+                }
+            };
+
+            copyResultBtn.addEventListener('click', () => copyToClipboard(rawResultForCopy));
+            
+            const applyTheme = (theme) => {
+                const themeIconMoon = document.getElementById('theme-icon-moon');
+                const themeIconSun = document.getElementById('theme-icon-sun');
+                if (theme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIconMoon.style.display = 'none';
+                    themeIconSun.style.display = 'block';
+                } else {
+                    document.body.classList.remove('light-theme');
+                    themeIconMoon.style.display = 'block';
+                    themeIconSun.style.display = 'none';
+                }
+            };
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+            });
+
+            // --- Inicialização ---
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+            populateTable();
+            convertText();
+        });
+    </script>
+</body>
+</html>
