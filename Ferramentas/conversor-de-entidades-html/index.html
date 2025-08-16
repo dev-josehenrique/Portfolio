@@ -312,7 +312,6 @@
             const searchInput = document.getElementById('searchInput');
             const noResultsRow = document.getElementById('no-results-row');
             
-            // Variável para armazenar o resultado real para a cópia
             let rawResultForCopy = '';
 
             const entityMap = {
@@ -331,18 +330,26 @@
                 'ç': { lower: '&ccedil;', upper: '&Ccedil;', numLower: '&#231;', numUpper: '&#199;' }
             };
 
+            const escapeHtmlForDisplay = (str) => {
+                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            };
+
             const populateTable = () => {
                 let html = '';
                 for (const char in entityMap) {
                     const data = entityMap[char];
-                    html += `<tr><td>${char}</td><td>${data.lower}</td><td>${data.numLower}</td></tr>`;
-                    html += `<tr><td>${char.toUpperCase()}</td><td>${data.upper}</td><td>${data.numUpper}</td></tr>`;
+                    html += `<tr>
+                                <td>${char}</td>
+                                <td>${escapeHtmlForDisplay(data.lower)}</td>
+                                <td>${escapeHtmlForDisplay(data.numLower)}</td>
+                            </tr>`;
+                    html += `<tr>
+                                <td>${char.toUpperCase()}</td>
+                                <td>${escapeHtmlForDisplay(data.upper)}</td>
+                                <td>${escapeHtmlForDisplay(data.numUpper)}</td>
+                            </tr>`;
                 }
                 noResultsRow.insertAdjacentHTML('beforebegin', html);
-            };
-
-            const escapeHtmlForDisplay = (str) => {
-                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             };
 
             const convertText = () => {
@@ -366,9 +373,7 @@
                         result += char;
                     }
                 }
-                // Armazena o resultado real para a cópia
                 rawResultForCopy = result;
-                // Exibe o resultado "escapado" para visualização correta
                 outputText.value = escapeHtmlForDisplay(result);
             };
 
@@ -377,8 +382,9 @@
                 const rows = tableBody.querySelectorAll('tr:not(#no-results-row)');
                 let visibleRows = 0;
                 rows.forEach(row => {
+                    
                     const rowText = row.textContent.toLowerCase();
-                    if (rowText.includes(query)) {
+                    if (rowText.includes(query) || row.innerHTML.toLowerCase().includes(query)) {
                         row.style.display = '';
                         visibleRows++;
                     } else {
@@ -434,7 +440,6 @@
                 applyTheme(newTheme);
             });
 
-            // --- Inicialização ---
             const savedTheme = localStorage.getItem('theme') || 'dark';
             applyTheme(savedTheme);
             populateTable();
